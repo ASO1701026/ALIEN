@@ -195,6 +195,7 @@
       if (micList.selectedIndex == 1) {
         document.getElementById('speaker_ON').style.display = "none";
         document.getElementById('speaker_OFF').style.display = "block";
+        micList.selectedIndex = 0;
         // speakerList.selectedIndex = 0;
       }
       else {
@@ -205,3 +206,20 @@
       }
     }
 //
+
+  </script>
+  <!-- threevrm関連 -->
+  <script src="https://unpkg.com/three@0.108"></script>
+  <script src="https://unpkg.com/three@0.108/examples/js/loaders/GLTFLoader.js"></script>
+  <script src="https://unpkg.com/@pixiv/three-vrm@0.1/lib/three-vrm.js"></script>
+  <script src="./javascripts/jeelizFaceFilter.js"></script>
+  <script src="./javascripts/JeelizResizer.js"></script>
+  <script src="./javascripts/threevrm.js"></script>
+
+  <!-- skyway関連 -->
+  <script src="//cdn.webrtc.ecl.ntt.com/skyway-latest.js"></script>
+  <script src="./key.js"></script>
+  <script src="./javascripts/SharedUrl.js"></script>
+  <script src="./javascripts/script.js"></script>
+</body>
+</html>
