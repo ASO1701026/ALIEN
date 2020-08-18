@@ -6,9 +6,6 @@ const Peer = window.Peer;
   const localVideo = document.getElementById('js-local-stream');
   const joinTrigger = document.getElementById('js-join-trigger');
   const leaveTrigger = document.getElementById('js-leave-trigger');
-  // 相手の
-  // const remoteVideos = document.getElementById('js-remote-streams');
-  // const roomId = document.getElementById('js-room-id');
   const roomMode = document.getElementById('js-room-mode');
   //threevrmのcanvas読み込み
   let canvas = null;
@@ -19,8 +16,7 @@ const Peer = window.Peer;
   
   const meta = document.getElementById('js-meta');
   const sdkSrc = document.querySelector('script[src*=skyway]');
-  let count = 0;  // カウント
-  const remoteVideos = document.getElementById('js-remote-streams'+count);
+  const remoteVideos = document.getElementById('js-remote-streams');
   //共有機能の変数
   const shareTrigger = document.getElementById('js-share-trigger');
   //GETパラメータ(部屋名)を取得
@@ -84,7 +80,6 @@ const Peer = window.Peer;
 
       // awaitはasync streamの実行を一時停止し、Promiseの解決または拒否を待ちます。
       await newVideo.play().catch(console.error);
-      count+=1;
     });
     
     // 誰かが退出した場合、div（remoteVideos）内にある任意のdata-peer-idがついたvideoタグの内容を空にして削除する
@@ -109,6 +104,7 @@ const Peer = window.Peer;
    
     // ボタン（leaveTrigger）を押すとroom.close()を発動
     leaveTrigger.addEventListener('click', () => {
+      
       room.close();
       //ここにHPのURLを記載する/今回はデプロイする前でHPのURLが存在しないためgoogleのURLを記載している
       window.open('https://www.google.com/', '_self').close();
@@ -126,20 +122,21 @@ const Peer = window.Peer;
   const toggleCamera = document.getElementById('js-toggle-camera');
   const toggleMicrophone = document.getElementById('js-toggle-microphone');
   //ボタン押した時のカメラ関係の動作
-  toggleCamera.addEventListener('click', () => {
-    const videoTracks = localStream.getVideoTracks()[0];
-    videoTracks.enabled = !videoTracks.enabled;
-    console.log(videoTracks.enabled)
-    console.log()
-    toggleCamera.textContent = `カメラ${videoTracks.enabled ? 'ON' : 'OFF'}`;
-  });
-  //ボタン押した時のマイク関係の動作
-  toggleMicrophone.addEventListener('click', () => {
-    const audioTracks = localStream.getAudioTracks()[0];
-    audioTracks.enabled = !audioTracks.enabled;
-    console.log(audioTracks.enabled)
-    toggleMicrophone.textContent = `マイク${audioTracks.enabled ? 'ON' : 'OFF'}`;
-  });
+toggleCamera.addEventListener('click', () => {
+  const canvas2 = document.getElementById('canvas2');
+  const videoTracks = localStream.getVideoTracks()[0];
+  videoTracks.enabled = !videoTracks.enabled;
+  console.log(videoTracks.enabled)
+  toggleCamera.className = `${videoTracks.enabled ? 'camera-btn' : 'camera-btn_OFF'}`;
+  canvas2.className = `${videoTracks.enabled  ? '' : 'canvas2_cover'}`;
+});
+//ボタン押した時のマイク関係の動作
+toggleMicrophone.addEventListener('click', () => {
+  const audioTracks = localStream.getAudioTracks()[0];
+  audioTracks.enabled = !audioTracks.enabled;
+  console.log(audioTracks.enabled)
+  toggleMicrophone.className = `${audioTracks.enabled ? 'mic-btn' : 'mic-btn_OFF'}`;
+});
 
   //URLのGETパラメータを取得
   function getParam(){

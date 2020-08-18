@@ -25,9 +25,11 @@ video {
 }
 
 .container {
+  display: grid;
   margin-left: auto;
   margin-right: auto;
-  width: 980px;
+  height: 100%;
+
 }
 
 /* p2p-media styles */
@@ -59,14 +61,6 @@ video {
   padding: 8px;
   margin-top: 0;
 }
-/*
-.room {
-  display: grid;
-  grid-template-columns: 60% 80% 60%;
-  gap: 8px;
-  margin: 0 8px;
-}
-*/
 
 /* 相手のビデオ画面変更 */
 .room .remote-streams {
@@ -74,55 +68,29 @@ video {
   border: solid;
   background-color: #3B1D70;
   border-color: #f6fbff;
-}
-
-.room .messages {
-  background-color: #eee;
-  min-height: 100px;
-  padding: 8px;
-  margin-top: 0;
+  /* height: 100%; */
 }
 
 /* HTMLのコンテナ*/
 
-/*
- .room {
-  display: grid;
-  grid-template-rows: 100px 50px;
-  grid-template-columns: 150px 1fr;
-}
-*/
 /*人数変更*/
 .remote-streams {
   display: grid;
-  /* ここいじれ */
+  /*
+  grid-template-rows: 100px 100px;
+  grid-template-columns: 100% 100%;
+  */
   grid-template-columns: 1fr 1fr;
-  /* ここいじれ */
   grid-template-rows: 1fr 1fr;
   border: solid;
   border-color: #031de2;
   background-color: #3B1D70;
 }
 
-/*
-#local-video {
-  grid-row: 1; grid-column: 1;
-}
-#js-remote-streams0 {
-  grid-row: 1; grid-column: 2;
-}
-#js-remote-streams1 {
-  grid-row: 2; grid-column: 2;
-}
-#js-remote-streams2 {
-  grid-row: 2; grid-column: 1;
-}
-*/
-
 .camera-btn{
   display: inline-block;
   text-decoration: none;
-  background: #3B1D70;
+/*  background: #3B1D70; */
   color: #FFF;
   width: 60px;
   height: 60px;
@@ -139,7 +107,7 @@ video {
 .mic-btn{
   display: inline-block;
   text-decoration: none;
-  background: #3B1D70;
+/*  background: #3B1D70; */
   color: #FFF;
   width: 60px;
   height: 60px;
@@ -148,9 +116,6 @@ video {
   text-align: center;
   overflow: hidden;
   transition: .4s;
-}
-.mic-btn{
-  background: #3B1D70;
 }
 
 /* スマホ写した時 */
@@ -198,4 +163,158 @@ p#wait_message{
   text-align: center;
   color: #e5e5e5;
   margin-top: 100px;
+}
+
+/* 各機能ボタン */
+style.css
+.camera-btn{
+  display: inline-block;
+  text-decoration: none;
+/*  background: #3B1D70; */
+  color: #FFF;
+  width: 60px;
+  height: 60px;
+  line-height: 60px;
+  border-radius: 50%;
+  text-align: center;
+  overflow: hidden;
+  transition: .4s;
+}
+.camera-btn:before {
+  content: "";
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background: url("./image/video_on.png") no-repeat;
+  background-size: contain;
+  vertical-align: middle;
+}
+.camera-btn:hover{
+  background: #FFFFFF;
+}
+.camera-btn_OFF{
+  display: inline-block;
+  text-decoration: none;
+/*  background: #3B1D70; */
+  color: #FFF;
+  width: 60px;
+  height: 60px;
+  line-height: 60px;
+  border-radius: 50%;
+  text-align: center;
+  overflow: hidden;
+  transition: .4s;
+}
+.camera-btn_OFF:before {
+  content: "";
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background: url("./image/video_off.png") no-repeat;
+  background-size: contain;
+  vertical-align: middle;
+}
+.camera-btn_OFF:hover{
+  background: #FFFFFF;
+}
+.mic-btn{
+  display: inline-block;
+  text-decoration: none;
+/*  background: #3B1D70; */
+  color: #FFF;
+  width: 60px;
+  height: 60px;
+  line-height: 60px;
+  border-radius: 50%;
+  text-align: center;
+  overflow: hidden;
+  transition: .4s;
+}
+.mic-btn:hover{
+  background: #FFFFFF;
+}
+.mic-btn:before {
+  content: "";
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background: url("./image/voice_on.png") no-repeat;
+  background-size: contain;
+  vertical-align: middle;
+}
+.mic-btn_OFF{
+  display: inline-block;
+  text-decoration: none;
+/*  background: #3B1D70; */
+  color: #FFF;
+  width: 60px;
+  height: 60px;
+  line-height: 60px;
+  border-radius: 50%;
+  text-align: center;
+  overflow: hidden;
+  transition: .4s;
+}
+.mic-btn_OFF:hover{
+  background: #FFFFFF;
+}
+.mic-btn_OFF:before {
+  content: "";
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background: url("./image/voice_off.png") no-repeat;
+  background-size: contain;
+  vertical-align: middle;
+}
+.leave-btn{
+  display: inline-block;
+  text-decoration: none;
+/*  background: #3B1D70; */
+  color: #FFF;
+  width: 60px;
+  height: 60px;
+  line-height: 60px;
+  border-radius: 50%;
+  text-align: center;
+  overflow: hidden;
+  transition: .4s;
+}
+.leave-btn:hover{
+  background: #FFFFFF;
+}
+.leave-btn:before {
+  content: "";
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background: url("./Leave.png") no-repeat;
+  background-size: contain;
+  vertical-align: middle;
+}
+
+.share-btn{
+  display: inline-block;
+  text-decoration: none;
+/*  background: #3B1D70; */
+  color: #FFF;
+  width: 60px;
+  height: 60px;
+  line-height: 60px;
+  border-radius: 50%;
+  text-align: center;
+  overflow: hidden;
+  transition: .4s;
+}
+.share-btn:before {
+  content: "";
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background: url("./image/share.png") no-repeat;
+  background-size: contain;
+  vertical-align: middle;
+}
+.share-btn:hover{
+  background: #FFFFFF;
 }
