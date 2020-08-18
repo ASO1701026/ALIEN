@@ -11,7 +11,8 @@ const Peer = window.Peer;
   let canvas = null;
   while(canvas == null){
   canvas = document.getElementById("canvas2").captureStream();
-  console.log("est");
+  document.getElementById("canvas2").style.cssText += "hidden transform: rotateY(180deg);-webkit-transform:rotateY(180deg);-moz-transform:rotateY(180deg);-ms-transform:rotateY(180deg);";
+  document.getElementById("canvas2").style.visibility = "hidden";
   }
   
   const meta = document.getElementById('js-meta');
@@ -20,7 +21,12 @@ const Peer = window.Peer;
   //共有機能の変数
   const shareTrigger = document.getElementById('js-share-trigger');
   //GETパラメータ(部屋名)を取得
-  let roomId = getParam();
+  let roomId
+  let time
+  let type
+  let model
+  getParam();
+  
   metainnerText = `
   `.trim();
   // 同時接続モードがSFUなのかMESHなのかをここで設定
@@ -36,10 +42,9 @@ const Peer = window.Peer;
       audio: true,
       video: true,
     })
-    .catch(console.error);
   // localStreamをdiv(localVideo)に挿入
-  localVideo.muted = true;
   localVideo.srcObject = localStream;
+  localVideo.muted = true;
   localVideo.playsInline = true;
   await localVideo.play().catch(console.error);
   // Peerのインスタンス作成
@@ -61,6 +66,8 @@ const Peer = window.Peer;
       // stream: localStream,
       stream: canvas, //canvasをstreamに渡すと相手に渡せる
     });
+
+    // const audioStream = await navigator.mediaDevices.getUserMedia({ audio: true })
 
     // Render remote stream for new peer join in the room
     // 重要：streamの内容に変更があった時（stream）videoタグを作って流す
@@ -107,13 +114,14 @@ const Peer = window.Peer;
       
       room.close();
       //ここにHPのURLを記載する/今回はデプロイする前でHPのURLが存在しないためgoogleのURLを記載している
-      window.open('https://www.google.com/', '_self').close();
+      window.open('https://kg-alien.herokuapp.com/HP.html', '_self').close();
     }, 
     { once: true });
   });
 
   //追加機能share
-  var copy_url = document.URL
+  let copy_url = document.URL
+  console.log(copy_url.replace('model=', ''))
   shareTrigger.addEventListener('click',() => {
     shared_url_copy(copy_url);
     alert("コピーできました");
@@ -121,14 +129,17 @@ const Peer = window.Peer;
   
   const toggleCamera = document.getElementById('js-toggle-camera');
   const toggleMicrophone = document.getElementById('js-toggle-microphone');
+  const chenge = document.getElementById('change');
+  
+
   //ボタン押した時のカメラ関係の動作
 toggleCamera.addEventListener('click', () => {
   const canvas2 = document.getElementById('canvas2');
   const videoTracks = localStream.getVideoTracks()[0];
   videoTracks.enabled = !videoTracks.enabled;
-  console.log(videoTracks.enabled)
   toggleCamera.className = `${videoTracks.enabled ? 'camera-btn' : 'camera-btn_OFF'}`;
   canvas2.className = `${videoTracks.enabled  ? '' : 'canvas2_cover'}`;
+
 });
 //ボタン押した時のマイク関係の動作
 toggleMicrophone.addEventListener('click', () => {
@@ -138,11 +149,50 @@ toggleMicrophone.addEventListener('click', () => {
   toggleMicrophone.className = `${audioTracks.enabled ? 'mic-btn' : 'mic-btn_OFF'}`;
 });
 
+//マスク関係の動作
+if(type=="mask"){
+  maskhyouzi();
+}else if(type=='babiniku'){
+  if(typeof model == "string" ){
+    syokika = true
+    let VRM = ['','../assets/test1.vrm','../assets/test2.vrm','../assets/test3.vrm','../assets/test4.vrm']
+    threevrm(VRM[model]);
+  }else{
+  syokika = true
+  let VRMnum = Math.floor( Math.random() * 4 )+1 ;
+  let VRM = ['','../assets/test1.vrm','../assets/test2.vrm','../assets/test3.vrm','../assets/test4.vrm']
+  console.log(VRMnum);
+  threevrm(VRM[VRMnum]);
+  }
+}
+chenge.addEventListener('click', () => {
+  if(type=="mask"){
+  }else if(type=='babiniku'){
+    if (syokika) {
+      console.log("メモリ消去")
+      scene.remove.apply(scene, scene.children);
+    }
+    syokika = true
+    currentVRM = null;
+    let VRMnum = Math.floor( Math.random() * 4 )+1 ;
+    let VRM = ['','../assets/test1.vrm','../assets/test2.vrm','../assets/test3.vrm','../assets/test4.vrm']
+    console.log(VRMnum);
+    threevrm(VRM[VRMnum]);
+  }
+});
+
+  // エラー時のダイアログ表示
+  function error(message, linkText, linkHref) {
+    __modal("エラー", message, linkText, linkHref);
+  };
+
   //URLのGETパラメータを取得
   function getParam(){
     let params = (new URL(document.location)).searchParams;
-    let roomId = params.get('roomid');
-    return roomId;
+    roomId = params.get('roomid');
+    time = params.get('time');
+    type = params.get('type');
+    model = params.get('model');
   }
   peer.on('error', console.error);
 })();
