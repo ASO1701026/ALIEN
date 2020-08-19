@@ -68,17 +68,11 @@ video {
   border: solid;
   background-color: #3B1D70;
   border-color: #f6fbff;
-  /* height: 100%; */
 }
-
 
 /*人数変更*/
 .remote-streams {
   display: grid;
-  /*
-  grid-template-rows: 100px 100px;
-  grid-template-columns: 100% 100%;
-  */
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
   border: solid;

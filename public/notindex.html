@@ -24,47 +24,25 @@
     </div>
 
   <div class="container">
-
     <div class="room">
       <div id = "container">
         <div class="remote-streams" id="js-remote-streams">
-          <video class="local-video" id="js-local-stream" style="transform: scaleX(-1);"></video>
-          <br>
-          <div>
-            <!-- stream画面内にボタンを表示する場合(細かい位置は設定途中) -->
-          <!-- <button id="js-toggle-camera" class="camera-btn"></button>      
-          <button id="js-toggle-microphone" class="mic-btn"></button>
-          <button id="js-leave-trigger" class="leave-btn">Leave</button> -->
+          <video class="local-video" id="js-local-stream" ></video>
+          <!--style="transform: scaleX(-1);"-->
+        </div>
+        <!-- ルーム検索 -->
+        <div>
+          <span id="js-room-mode"></span>
+          <button id="js-leave-trigger" class="leave-btn">Leave</button> <!--退席-->
+          <button id="js-share-trigger">share</button><!--共有-->
+          <button id="js-toggle-camera" class="camera-btn"></button><!--カメラ-->      
+          <button id="js-toggle-microphone" class="mic-btn"></button><!--マイク-->
+          <button id="change">change</button><!--スタンプ種類変更-->
         </div>
       </div>
-    <p></p>
-        <!-- ルーム検索 -->
-      <div>
-        <span id="js-room-mode"></span>
-        <!-- ルームに接続 -->
-        <button id="js-leave-trigger" class="leave-btn">Leave</button>
-        <button id="js-share-trigger">share</button>
-        <br>
-          <button id="js-toggle-camera" class="camera-btn"></button>      
-          <button id="js-toggle-microphone" class="mic-btn"></button>
-          <button id="change">change</button>
-          <br>
-          <div>
-            <div class="row">
-              <div class="col-12">
-              </div>
-            </div>
-          </div>
-    </div>
-  </div>
-<!--        <div>
-          <pre class="messages" id="js-messages"></pre>
-          <input type="text" id="js-local-text">
-          <button id="js-send-trigger">Send</button>
-        </div>
--->
       <p class="meta" id="js-meta"></p>
-  </div> <!-- container -->
+    </div> <!-- container -->
+  </div>
     <!-- threevrm関連 -->
     <script src="https://unpkg.com/three@0.108"></script>
     <script src="https://unpkg.com/three@0.108/examples/js/loaders/GLTFLoader.js"></script>
@@ -81,11 +59,13 @@
     <script src="./javascripts/Loading.js"></script>
     <script src="./javascripts/Overlayout.js"></script>
     <script src="./javascripts/script.js"></script>
-    <div class="btn_div">
+<!--    さいとう　時間ボタン
+      <div class="btn_div">
       <button id="test1">時間</button>
     </div>
-
-    <!-- <script>
+-->
+    <!-- 　　　　時間の処理
+      <script>
               document.getElementById('test1').onclick=function(){
               }
               window.onload = function(){
@@ -103,9 +83,6 @@
 
                 
               }
-
-    </script> -->
+      </script> -->
   </body>
-
-
 </html>
