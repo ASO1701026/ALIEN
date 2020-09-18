@@ -10,7 +10,7 @@ const Peer = window.Peer;
   //threevrmのcanvas読み込み
   let canvas = null;
   while(canvas == null){
-  canvas = document.getElementById("canvas2").captureStream();
+  canvas = document.getElementById("canvas2").captureStream(30);
   document.getElementById("canvas2").style.cssText += "hidden transform: rotateY(180deg);-webkit-transform:rotateY(180deg);-moz-transform:rotateY(180deg);-ms-transform:rotateY(180deg);";
   //document.getElementById("canvas2").style.visibility = "hidden";
   }
@@ -46,6 +46,8 @@ const Peer = window.Peer;
   
   const audioStream = await navigator.mediaDevices.getUserMedia({ audio: true })
   const videoStream = await navigator.mediaDevices.getUserMedia({ video: true })
+  const audioTrack = audioStream.getAudioTracks()[0]
+  canvas.addTrack(audioTrack)
     // const audioTrack = audioStream.getAudioTracks()[0]
     // remoteVideos.srcObject.addTrack(audioTrack)
   localVideo.srcObject = localStream;
@@ -70,8 +72,6 @@ const Peer = window.Peer;
       mode: getRoomModeByHash(),
       // stream: localStream,
       stream: canvas, //canvasをstreamに渡すと相手に渡せる
-      stream: audioStream,
-      stream: videoStream,
     });
 
     // Render remote stream for new peer join in the room
@@ -132,7 +132,8 @@ const Peer = window.Peer;
 
   //追加機能share
   let copy_url = document.URL
-  console.log(copy_url.replace('model=', ''))
+  copy_url = copy_url.replace('model=', '')
+  console.log(copy_url)
   shareTrigger.addEventListener('click',() => {
     shared_url_copy(copy_url);
     alert("コピーできました");
