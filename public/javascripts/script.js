@@ -152,7 +152,6 @@ toggleCamera.addEventListener('click', () => {
   videoTracks.enabled = !videoTracks.enabled;
   toggleCamera.className = `${videoTracks.enabled ? 'camera-btn' : 'camera-btn_OFF'}`;
   canvas2.className = `${videoTracks.enabled  ? '' : 'canvas2_cover'}`;
-
 });
 
 // ボタン押した時のマイク関係の動作

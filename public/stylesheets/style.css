@@ -84,6 +84,7 @@ video {
   border: solid;
   border-color: #031de2;
   background-color: #3B1D70;
+  z-index: 1;
 }
 #user1{
   grid-row: 1/2;
